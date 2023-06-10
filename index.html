@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const chuckLink = "https://api.chucknorris.io/jokes/random"
+    const url = 'http://localhost:3000/hello';
+    const data = { link: chuckLink }
+
+    function isJsonString(response) {
+
+        const contentType = response.headers.get("content-type");
+        console.log(contentType)
+        if (contentType && contentType.includes("application/json")) {
+            console.log("IS JSON")
+            return response.json()
+        } else {
+            console.log("ISN'T JSON")
+            return response.text()
+        }
+    }
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => isJsonString(response)).then(result => {
+
+        console.log(result)
+        const paragraph = document.createElement("p")
+        paragraph.innerText = result.value
+        document.body.appendChild(paragraph)
+    }).catch(err => {
+        console.log(err)
+    })
+
+</script>
+
+</html>
