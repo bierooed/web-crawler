@@ -9,12 +9,16 @@
 </head>
 
 <body>
+    <div id="root-div" style="display: flex; flex-direction: column;">
 
+    </div>
 </body>
 <script>
     const chuckLink = "https://api.chucknorris.io/jokes/random"
-    const url = 'http://localhost:3000/hello';
-    const data = { link: chuckLink }
+    const arianaLink = "https://arianasatryan.github.io/"
+
+    const url = 'http://localhost:3000/parse';
+    const data = { link: arianaLink }
 
     function isJsonString(response) {
 
@@ -37,10 +41,16 @@
         body: JSON.stringify(data)
     }).then(response => isJsonString(response)).then(result => {
 
-        console.log(result)
-        const paragraph = document.createElement("p")
-        paragraph.innerText = result.value
-        document.body.appendChild(paragraph)
+        const rootDiv = document.getElementById("root-div")
+        result.forEach((href, idx) => {
+            if (href !== "/") {
+                const linkTag = document.createElement("a")
+                linkTag.innerText = href
+                linkTag.href = href
+                linkTag.target = "_blank"
+                rootDiv.appendChild(linkTag)
+            }
+        })
     }).catch(err => {
         console.log(err)
     })

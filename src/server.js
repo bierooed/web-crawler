@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/hello", (postReq, postRes) => {
+app.post("/parse", (postReq, postRes) => {
   let data = "";
   postReq.on("data", (chunk) => {
     data += chunk;
@@ -49,7 +49,8 @@ app.post("/hello", (postReq, postRes) => {
           postRes.setHeader("Content-Type", "application/json");
         }
 
-        postRes.send(responseData);
+        console.log(links);
+        postRes.send(links);
       });
     });
 
