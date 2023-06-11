@@ -13,6 +13,17 @@ app.use((req, res, next) => {
   next();
 });
 
+function crawler(arr, data) {
+  const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
+  let match;
+  while ((match = regex.exec(data))) {
+    const href = match[2];
+    if (!arr.includes(href)) {
+      arr.push(href);
+    }
+  }
+}
+
 app.post("/parse", (postReq, postRes) => {
   let data = "";
   postReq.on("data", (chunk) => {
@@ -34,14 +45,7 @@ app.post("/parse", (postReq, postRes) => {
 
       getResponse.on("data", (chunk) => {
         responseData += chunk;
-        const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
-        let match;
-        while ((match = regex.exec(responseData))) {
-          const href = match[2];
-          if (!links.includes(href)) {
-            links.push(href);
-          }
-        }
+        crawler(links, responseData);
       });
 
       getResponse.on("end", () => {
