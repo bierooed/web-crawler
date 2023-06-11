@@ -38,7 +38,9 @@ app.post("/parse", (postReq, postRes) => {
         let match;
         while ((match = regex.exec(responseData))) {
           const href = match[2];
-          links.push(href);
+          if (!links.includes(href)) {
+            links.push(href);
+          }
         }
       });
 
@@ -48,7 +50,6 @@ app.post("/parse", (postReq, postRes) => {
           postRes.setHeader("Content-Type", "application/json");
         }
 
-        console.log(links);
         postRes.send(links);
       });
     });
