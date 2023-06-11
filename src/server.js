@@ -20,7 +20,6 @@ app.post("/parse", (postReq, postRes) => {
   });
 
   postReq.on("end", () => {
-    // GET METHOD START
     const link = JSON.parse(data).link;
     const url = new URL(link);
     const getOptions = {
