@@ -1,7 +1,7 @@
 const randomLink = "https://example.github.io/";
 
 const url = "http://localhost:3000/parse";
-const data = { link: "https://www.youtube.com/" };
+const data = { domainName: "https://www.youtube.com/" };
 
 function isJsonString(response) {
   const contentType = response.headers.get("content-type");

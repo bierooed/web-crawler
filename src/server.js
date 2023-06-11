@@ -31,8 +31,9 @@ app.post("/parse", (postReq, postRes) => {
   });
 
   postReq.on("end", () => {
-    const link = JSON.parse(data).link;
+    const link = JSON.parse(data).domainName;
     const url = new URL(link);
+    console.log(JSON.parse(data));
     const getOptions = {
       hostname: url.hostname,
       path: url.pathname,
