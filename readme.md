@@ -1,5 +1,5 @@
-# Exploring NodeJS
+# Web crawler
 
-Exploring how post/get methods work. Write small program which send some url in server, then retrieve some data by making a request, so and after create an html tag, add the resulting text inside it.
+Сrawler program using Node.js that traverses a given URL and collects a list of all links to other pages.
 
-_P.S. More work had to be done on the processing of the resulting data depending on its type_
+_P.S. Just starting to learn backend and nodejs, so I can make a lot of mistakes in code_
